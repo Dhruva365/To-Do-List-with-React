@@ -23,18 +23,17 @@ export default function Input() {
     setDisable(true);
   }
 
-  function onChangeHandle(index) {
+  function onChangeHandle(status, index) {
     {
       const newArr = showDetails.map((obj, i) => {
-        if (i === index && obj.flag === false) {
+        if (i === index) {
           return {
             ...obj,
-            flag: true,
+            flag: status,
           };
         } else {
           return {
             ...obj,
-            flag: false,
           };
         }
       });
@@ -61,13 +60,13 @@ export default function Input() {
       <button onClick={onClickHandle} disabled={disable}>
         ADD
       </button>
-      <div>
+      <ul>
         {showDetails.map((item, i) => (
           <li key={i}>
             <input
               type="checkbox"
-              onChange={() => {
-                onChangeHandle(i);
+              onChange={(e) => {
+                onChangeHandle(e.target.checked, i);
               }}
             />
             {item.flag ? <del>{item.result}</del> : item.result}
@@ -84,7 +83,7 @@ export default function Input() {
             )}
           </li>
         ))}
-      </div>
+      </ul>
     </>
   );
 }
